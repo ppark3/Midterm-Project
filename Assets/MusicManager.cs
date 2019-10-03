@@ -21,28 +21,41 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        goodSongTime = 0f;
+        goodSongTime = 10f;
         goodPlaying = false;
+        badSongTime = 15f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (goodDancing && !goodPlaying)
+        if (goodDancing && !goodPlaying && !badDancing)
         {
             audioSource.clip = goodSong;
             audioSource.time = goodSongTime;
             audioSource.Play();
             goodPlaying = true;
         }
-        if (goodDancing)
+        if (badDancing && !badPlaying && !goodDancing)
+        {
+            audioSource.clip = badSong;
+            audioSource.time = badSongTime;
+            audioSource.Play();
+            badPlaying = true;
+        }
+        if (goodDancing && !badDancing)
         {
             goodSongTime = audioSource.time;
         }
-        if (!goodDancing)
+        if (badPlaying && !goodDancing)
+        {
+            badSongTime = audioSource.time;
+        }
+        if (!goodDancing && !badDancing)
         {
             audioSource.Stop();
             goodPlaying = false;
+            badPlaying = false;
         }
     }
 }
