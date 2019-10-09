@@ -19,37 +19,40 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W) && !Input.GetKeyDown(KeyCode.J)) // moving up
+        if (!GameManager.cutscene1)
         {
-            this.transform.Translate(new Vector3(0, 0, -moveSpeed * Time.deltaTime));
-        }
-        if (Input.GetKey(KeyCode.A) && !Input.GetKeyDown(KeyCode.J)) // moving left
-        {
-            this.transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
-        }
-        if (Input.GetKey(KeyCode.D) && !Input.GetKeyDown(KeyCode.J)) // moving right
-        {
-            this.transform.Translate(new Vector3(-moveSpeed * Time.deltaTime, 0, 0));
-        }
-        if (Input.GetKey(KeyCode.S) && !Input.GetKeyDown(KeyCode.J)) // moving down
-        {
-            this.transform.Translate(new Vector3(0, 0, moveSpeed * Time.deltaTime));
-        }
-        if (Input.GetKeyDown(KeyCode.J) && !caught)
-        {
-            musicManager.gameObject.GetComponent<MusicManager>().goodDancing = true;
-            GameManager.dancing = true;
-            GameManager.startIncrease = true;
-        }
-        if (Input.GetKeyUp(KeyCode.J))
-        {
-            musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
-            musicManager.gameObject.GetComponent<MusicManager>().badDancing = false;
-            GameManager.dancing = false;
-            GameManager.startDecrease = true;
-            GameManager.caught = false;
-            GameManager.startSpeedDecrease = false;
-            caught = false;
+            if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.z >= -15) // moving up
+            {
+                this.transform.Translate(new Vector3(0, 0, -moveSpeed * Time.deltaTime));
+            }
+            if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.x <= 50) // moving left
+            {
+                this.transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
+            }
+            if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.x >= -50) // moving right
+            {
+                this.transform.Translate(new Vector3(-moveSpeed * Time.deltaTime, 0, 0));
+            }
+            if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.z <= 15) // moving down
+            {
+                this.transform.Translate(new Vector3(0, 0, moveSpeed * Time.deltaTime));
+            }
+            if (Input.GetKeyDown(KeyCode.J) && !caught)
+            {
+                musicManager.gameObject.GetComponent<MusicManager>().goodDancing = true;
+                GameManager.dancing = true;
+                GameManager.startIncrease = true;
+            }
+            if (Input.GetKeyUp(KeyCode.J))
+            {
+                musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+                musicManager.gameObject.GetComponent<MusicManager>().badDancing = false;
+                GameManager.dancing = false;
+                GameManager.startDecrease = true;
+                GameManager.caught = false;
+                GameManager.startSpeedDecrease = false;
+                caught = false;
+            }
         }
     }
 
