@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -107,10 +108,19 @@ public class GameManager : MonoBehaviour
         if (slider.value <= 0.01)
         {
             lose = true;
+            cutscene3 = false;
+            cutscene2 = false;
+            cutscene1 = false;
+            SceneManager.LoadScene("SampleScene");
         }
         if (slider.value >= 0.99)
         {
-            if (cutscene2)
+            if (cutscene3)
+            {
+                winText.gameObject.SetActive(true);
+                win = true;
+            }
+            else if (cutscene2)
             {
                 cutscenePlaying = true;
                 slider.value = 0.5f;
@@ -124,8 +134,6 @@ public class GameManager : MonoBehaviour
                 totalTimerTime = 20f;
                 t = 0f;
             }
-            //winText.gameObject.SetActive(true);
-            //win = true;
         }
         // ***************************************************************
 
