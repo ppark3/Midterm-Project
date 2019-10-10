@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
                 value = slider.value;
                 startIncrease = false;
                 t = 0f;
-                totalTimerTime = 2f * (1 - slider.value);
+                totalTimerTime = 20f * (1 - slider.value);
             }
             slider.value = Mathf.Lerp(value, 1, Mathf.Min(1, t / totalTimerTime));
             t += Time.deltaTime;
@@ -199,13 +199,51 @@ public class GameManager : MonoBehaviour
                 {
                     player.gameObject.transform.position = playerPosition.position;
                     player.gameObject.transform.rotation = down.rotation;
+                    player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
                     passenger1.gameObject.SetActive(true);
                     camera1.enabled = false;
                     camera2.enabled = true;
                 }
             }
-            else if (!cutscene3)
+            else if (!cutscene3) // THIRD CUTSCENE ****************************************
             {
+                waitBeforeStart += Time.deltaTime;
+                if (waitBeforeStart >= 6)
+                {
+                    invisiWall.gameObject.SetActive(true);
+                    passenger2.gameObject.transform.rotation = left.rotation;
+                    cutscene2 = true;
+                    cutscenePlaying = false;
+                    waitBeforeStart = 0;
+                }
+                else if (waitBeforeStart >= 3)
+                {
+                    camera2.enabled = false;
+                    camera1.enabled = true;
+                    passenger2.gameObject.transform.rotation = right.rotation;
+                    passenger2.gameObject.transform.position = Vector3.MoveTowards(passenger2.gameObject.transform.position, passenger2Position.position, 0.5f);
+                    door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
+                    door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
+                }
+                else if (waitBeforeStart >= 2)
+                {
+                    passenger2.gameObject.transform.Translate(new Vector3(0, 0, 0.5f));
+                }
+                else if (waitBeforeStart >= 1)
+                {
+                    door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1Location.position, 0.1f);
+                    door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2Location.position, 0.1f);
+                    invisiWall.gameObject.SetActive(false);
+                }
+                else if (waitBeforeStart < 1)
+                {
+                    player.gameObject.transform.position = playerPosition.position;
+                    player.gameObject.transform.rotation = down.rotation;
+                    player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
+                    passenger2.gameObject.SetActive(true);
+                    camera1.enabled = false;
+                    camera2.enabled = true;
+                }
 
             }
         }

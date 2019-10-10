@@ -6,10 +6,14 @@ public class Passenger1 : MonoBehaviour
 {
     public GameObject player;
     public Vector3 actualTarget;
+    public GameObject can;
+    public Transform canTarget;
 
     public bool decideToLook;
     public bool commitToLook;
     public bool returning;
+
+    public bool decideToLookAtCan;
     
     public float rotateSpeed;
     public float returnRotateSpeed;
@@ -33,7 +37,9 @@ public class Passenger1 : MonoBehaviour
     {
         if (!GameManager.cutscenePlaying)
         {
-            if (GameManager.dancing)
+            // IF THE PLAYER IS DANCING, LOOK AT PLAYER BUT WAIT FIRST
+            // IF THE PLAYER DANCES WHILE RETURNING, COMMIT TO LOOK (LOOK WITHOUT WAITING)
+            if (GameManager.dancing && !player.gameObject.GetComponent<PlayerBehavior>().canThrown)
             {
                 decideToLook = true;
                 actualTarget = player.gameObject.transform.position;
@@ -46,15 +52,16 @@ public class Passenger1 : MonoBehaviour
             {
                 decideToLook = false;
             }
-            //this.transform.LookAt(target);
-            if ((decideToLook || commitToLook))
+
+            // IF DECIDED TO LOOK, DO THIS STUFF
+            if (decideToLook || commitToLook)
             {
                 distance = Vector3.Distance(transform.position, actualTarget);
                 if (!commitToLook)
                 {
                     waitBeforeLook += Time.deltaTime;
                 }
-                if (waitBeforeLook >= (distance / 10f))
+                if (waitBeforeLook >= (distance / 9f))
                 {
                     waitBeforeLook = 0;
                     commitToLook = true;
@@ -74,7 +81,8 @@ public class Passenger1 : MonoBehaviour
                     }
                 }
             }
-            else
+            // RETURN TO REGULAR LOOKING POSITION
+            else if (!player.gameObject.GetComponent<PlayerBehavior>().canThrown)
             {
                 waitBeforeReturn = 0;
                 Quaternion q = Quaternion.LookRotation(neutralLook - transform.position);
@@ -82,6 +90,37 @@ public class Passenger1 : MonoBehaviour
                 if (Quaternion.Angle(transform.rotation, q) <= 1f)
                 {
                     returning = false;
+                    waitBeforeLook = 0f;
+                }
+            }
+
+            if (player.gameObject.GetComponent<PlayerBehavior>().canThrown)
+            {
+                if (!decideToLookAtCan)
+                {
+                    waitBeforeLook += Time.deltaTime;
+                }
+                if (waitBeforeLook >= 0.5f)
+                {
+                    waitBeforeLook = 0;
+                    decideToLookAtCan = true;
+                }
+
+                if (decideToLookAtCan)
+                {
+                    canTarget = can.gameObject.transform;
+                    Quaternion q = Quaternion.LookRotation((canTarget.position + new Vector3(0, 2.8f, 0)) - transform.position);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, q, rotateSpeed * Time.deltaTime);
+                    if (Quaternion.Angle(transform.rotation, q) <= 1)
+                    {
+                        waitBeforeReturn += Time.deltaTime;
+                        if (waitBeforeReturn >= 4f)
+                        {
+                            player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
+                            decideToLookAtCan = false;
+                            waitBeforeLook = 0f;
+                        }
+                    }
                 }
             }
         }

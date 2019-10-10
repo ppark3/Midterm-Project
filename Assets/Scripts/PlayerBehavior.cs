@@ -15,6 +15,12 @@ public class PlayerBehavior : MonoBehaviour
     public Transform left;
     public Transform right;
 
+    public bool canPickUp;
+    public bool pickedUp;
+    public bool canThrown;
+    public GameObject can;
+    public GameObject canPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +67,27 @@ public class PlayerBehavior : MonoBehaviour
                 GameManager.caught = false;
                 GameManager.startSpeedDecrease = false;
                 caught = false;
+            }
+            if (Input.GetKeyDown(KeyCode.K) && pickedUp)
+            {
+                can.GetComponent<Rigidbody>().AddForce(this.transform.forward * 3000);
+                can.GetComponent<Rigidbody>().useGravity = true;
+                can.GetComponent<BoxCollider>().isTrigger = false;
+                can.transform.parent = null;
+                pickedUp = false;
+                canThrown = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.K) && canPickUp && !pickedUp)
+            {
+                can.transform.parent = this.transform;
+                can.transform.position = canPosition.transform.position;
+                can.GetComponent<Rigidbody>().useGravity = false;
+                can.GetComponent<BoxCollider>().isTrigger = true;
+                pickedUp = true;
+            }
+            if (pickedUp)
+            {
+                can.transform.position = canPosition.transform.position;
             }
         }
         else
