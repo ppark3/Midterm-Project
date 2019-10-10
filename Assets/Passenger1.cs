@@ -14,6 +14,7 @@ public class Passenger1 : MonoBehaviour
     public float rotateSpeed;
     public float returnRotateSpeed;
     public Vector3 neutralLook;
+    public Transform passengerLocation;
 
     public float waitBeforeLook;
     public float waitBeforeReturn;
@@ -24,19 +25,18 @@ public class Passenger1 : MonoBehaviour
     {
         rotateSpeed = 100f;
         returnRotateSpeed = 80f;
-        neutralLook = transform.position + transform.forward;
+        neutralLook = passengerLocation.position + transform.forward;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.cutscene1)
+        if (!GameManager.cutscenePlaying)
         {
             if (GameManager.dancing)
             {
                 decideToLook = true;
                 actualTarget = player.gameObject.transform.position;
-                Debug.Log(actualTarget);
                 if (returning)
                 {
                     commitToLook = true;

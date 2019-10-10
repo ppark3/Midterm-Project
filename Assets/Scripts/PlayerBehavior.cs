@@ -10,6 +10,11 @@ public class PlayerBehavior : MonoBehaviour
 
     public bool caught;
 
+    public Transform up;
+    public Transform down;
+    public Transform left;
+    public Transform right;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,22 +24,26 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.cutscene1)
+        if (!GameManager.cutscenePlaying)
         {
             if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.z >= -15) // moving up
             {
-                this.transform.Translate(new Vector3(0, 0, -moveSpeed * Time.deltaTime));
+                this.transform.rotation = up.rotation;
+                this.transform.Translate(new Vector3(0, 0, moveSpeed * Time.deltaTime));
             }
             if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.x <= 50) // moving left
             {
-                this.transform.Translate(new Vector3(moveSpeed * Time.deltaTime, 0, 0));
+                this.transform.rotation = left.rotation;
+                this.transform.Translate(new Vector3(0, 0, moveSpeed * Time.deltaTime));
             }
             if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.x >= -50) // moving right
             {
-                this.transform.Translate(new Vector3(-moveSpeed * Time.deltaTime, 0, 0));
+                this.transform.rotation = right.rotation;
+                this.transform.Translate(new Vector3(0, 0, moveSpeed * Time.deltaTime));
             }
             if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.z <= 15) // moving down
             {
+                this.transform.rotation = down.rotation;
                 this.transform.Translate(new Vector3(0, 0, moveSpeed * Time.deltaTime));
             }
             if (Input.GetKeyDown(KeyCode.J) && !caught)
@@ -43,7 +52,7 @@ public class PlayerBehavior : MonoBehaviour
                 GameManager.dancing = true;
                 GameManager.startIncrease = true;
             }
-            if (Input.GetKeyUp(KeyCode.J))
+            if (Input.GetKeyUp(KeyCode.J) || GameManager.cutscenePlaying)
             {
                 musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
                 musicManager.gameObject.GetComponent<MusicManager>().badDancing = false;
@@ -53,6 +62,16 @@ public class PlayerBehavior : MonoBehaviour
                 GameManager.startSpeedDecrease = false;
                 caught = false;
             }
+        }
+        else
+        {
+            musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+            musicManager.gameObject.GetComponent<MusicManager>().badDancing = false;
+            GameManager.dancing = false;
+            GameManager.startDecrease = true;
+            GameManager.caught = false;
+            GameManager.startSpeedDecrease = false;
+            caught = false;
         }
     }
 
