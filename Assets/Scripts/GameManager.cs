@@ -30,11 +30,17 @@ public class GameManager : MonoBehaviour
     public Camera camera2; //camera 2 is used for cutscenes
     public GameObject door1;
     public GameObject door2;
+    public GameObject door3;
+    public GameObject door4;
     public GameObject invisiWall;
     public Transform door1Location;
     public Transform door2Location;
     public Vector3 door1OriginalLocation;
     public Vector3 door2OriginalLocation;
+    public Transform door3Location;
+    public Transform door4Location;
+    public Vector3 door3OriginalLocation;
+    public Vector3 door4OriginalLocation;
     public float waitBeforeStart;
 
     public Transform up;
@@ -62,6 +68,8 @@ public class GameManager : MonoBehaviour
         cutscenePlaying = true;
         door1OriginalLocation = door1.transform.position;
         door2OriginalLocation = door2.transform.position;
+        door3OriginalLocation = door3.transform.position;
+        door4OriginalLocation = door4.transform.position;
     }
 
     // Update is called once per frame
@@ -100,7 +108,7 @@ public class GameManager : MonoBehaviour
                 value = slider.value;
                 startSpeedDecrease = false;
                 t = 0f;
-                totalTimerTime = 3f * slider.value;
+                totalTimerTime = 5f * slider.value;
             }
             slider.value = Mathf.Lerp(value, 0, Mathf.Min(1, t / totalTimerTime));
             t += Time.deltaTime;
@@ -188,7 +196,7 @@ public class GameManager : MonoBehaviour
                 {
                     camera2.enabled = false;
                     camera1.enabled = true;
-                    passenger1.gameObject.transform.rotation = right.rotation;
+                    passenger1.gameObject.transform.rotation = Quaternion.RotateTowards(passenger1.gameObject.transform.rotation, right.rotation, 500f * Time.deltaTime);
                     passenger1.gameObject.transform.position = Vector3.MoveTowards(passenger1.gameObject.transform.position, passenger1Position.position, 0.5f);
                     door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
                     door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
@@ -249,6 +257,7 @@ public class GameManager : MonoBehaviour
                     player.gameObject.transform.rotation = down.rotation;
                     player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
                     passenger2.gameObject.SetActive(true);
+                    passenger2.gameObject.GetComponent<Passenger2>().facingLeft = true;
                     camera1.enabled = false;
                     camera2.enabled = true;
                 }

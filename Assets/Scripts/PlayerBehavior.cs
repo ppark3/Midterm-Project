@@ -9,6 +9,10 @@ public class PlayerBehavior : MonoBehaviour
     public GameObject musicManager;
 
     public bool caught;
+    public bool hiding;
+    public bool toPreventCheating;
+    public float toPreventCheatingNum;
+    public bool cheating;
 
     public Transform up;
     public Transform down;
@@ -54,19 +58,34 @@ public class PlayerBehavior : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.J) && !caught)
             {
+                if (toPreventCheatingNum <= 1f)
+                {
+                    cheating = true;
+                }
                 musicManager.gameObject.GetComponent<MusicManager>().goodDancing = true;
                 GameManager.dancing = true;
                 GameManager.startIncrease = true;
+                toPreventCheatingNum = 0f;
             }
             if (Input.GetKeyUp(KeyCode.J) || GameManager.cutscenePlaying)
             {
+                toPreventCheating = true;
                 musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
                 musicManager.gameObject.GetComponent<MusicManager>().badDancing = false;
-                GameManager.dancing = false;
                 GameManager.startDecrease = true;
+                GameManager.dancing = false;
                 GameManager.caught = false;
                 GameManager.startSpeedDecrease = false;
                 caught = false;
+            }
+            if (toPreventCheating)
+            {
+                toPreventCheatingNum += Time.deltaTime;
+            }
+            if (toPreventCheatingNum >= 3f)
+            {
+                toPreventCheating = false;
+                cheating = false;
             }
             if (Input.GetKeyDown(KeyCode.K) && pickedUp)
             {
@@ -106,7 +125,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (other.tag == "Vision")
         {
-            if (Input.GetKeyDown(KeyCode.J))
+            if (Input.GetKeyDown(KeyCode.J) && !hiding)
             {
                 caught = true;
                 musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
@@ -115,7 +134,7 @@ public class PlayerBehavior : MonoBehaviour
                 GameManager.caught = true;
                 GameManager.startSpeedDecrease = true;
             }
-            if (Input.GetKey(KeyCode.J) && !caught)
+            if (Input.GetKey(KeyCode.J) && !caught && !hiding)
             {
                 caught = true;
                 musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;

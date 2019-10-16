@@ -22,13 +22,14 @@ public class Passenger1 : MonoBehaviour
 
     public float waitBeforeLook;
     public float waitBeforeReturn;
+    public float waitBeforeCanReturn;
     public float distance;
 
     // Start is called before the first frame update
     void Start()
     {
-        rotateSpeed = 100f;
-        returnRotateSpeed = 80f;
+        rotateSpeed = 120f;
+        returnRotateSpeed = 90f;
         neutralLook = passengerLocation.position + transform.forward;
     }
 
@@ -39,7 +40,8 @@ public class Passenger1 : MonoBehaviour
         {
             // IF THE PLAYER IS DANCING, LOOK AT PLAYER BUT WAIT FIRST
             // IF THE PLAYER DANCES WHILE RETURNING, COMMIT TO LOOK (LOOK WITHOUT WAITING)
-            if (GameManager.dancing && !player.gameObject.GetComponent<PlayerBehavior>().canThrown)
+            if ((GameManager.dancing || player.gameObject.GetComponent<PlayerBehavior>().cheating) 
+                 && !player.gameObject.GetComponent<PlayerBehavior>().canThrown)
             {
                 decideToLook = true;
                 actualTarget = player.gameObject.transform.position;
@@ -82,9 +84,10 @@ public class Passenger1 : MonoBehaviour
                 }
             }
             // RETURN TO REGULAR LOOKING POSITION
-            else if (!player.gameObject.GetComponent<PlayerBehavior>().canThrown)
+            else if (!player.gameObject.GetComponent<PlayerBehavior>().canThrown || player.gameObject.GetComponent<PlayerBehavior>().pickedUp)
             {
                 waitBeforeReturn = 0;
+                waitBeforeCanReturn = 0f;
                 Quaternion q = Quaternion.LookRotation(neutralLook - transform.position);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, q, returnRotateSpeed * Time.deltaTime);
                 if (Quaternion.Angle(transform.rotation, q) <= 1f)
@@ -94,7 +97,7 @@ public class Passenger1 : MonoBehaviour
                 }
             }
 
-            if (player.gameObject.GetComponent<PlayerBehavior>().canThrown)
+            if (player.gameObject.GetComponent<PlayerBehavior>().canThrown && !player.gameObject.GetComponent<PlayerBehavior>().pickedUp)
             {
                 if (!decideToLookAtCan)
                 {
@@ -113,8 +116,8 @@ public class Passenger1 : MonoBehaviour
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, q, rotateSpeed * Time.deltaTime);
                     if (Quaternion.Angle(transform.rotation, q) <= 1)
                     {
-                        waitBeforeReturn += Time.deltaTime;
-                        if (waitBeforeReturn >= 4f)
+                        waitBeforeCanReturn += Time.deltaTime;
+                        if (waitBeforeCanReturn >= 4f)
                         {
                             player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
                             decideToLookAtCan = false;
@@ -123,6 +126,24 @@ public class Passenger1 : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Vision" &&
+            Vector3.Distance(this.gameObject.transform.position, other.gameObject.transform.parent.transform.position) <
+                Vector3.Distance(player.gameObject.transform.position, other.gameObject.transform.parent.transform.position))
+        {
+            player.gameObject.GetComponent<PlayerBehavior>().hiding = true;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Vision")
+        {
+            player.gameObject.GetComponent<PlayerBehavior>().hiding = false;
         }
     }
 }
