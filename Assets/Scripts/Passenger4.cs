@@ -47,7 +47,7 @@ public class Passenger4 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.cutscenePlaying || GameManager.win)
+        if (!GameManager.cutscenePlaying)
         {
             // IF THE PLAYER IS DANCING, LOOK AT PLAYER BUT WAIT FIRST
             // IF THE PLAYER DANCES WHILE RETURNING, COMMIT TO LOOK (LOOK WITHOUT WAITING)

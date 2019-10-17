@@ -38,7 +38,7 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.cutscenePlaying || GameManager.win)
+        if (!GameManager.cutscenePlaying)
         {
             if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.z >= -15) // moving up
             {

@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
             cutscene4 = false;
             cutscene5 = false;
             cutscene6 = false;
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("StartScreen");
         }
         // ********************* CONTROLLING THE BAR *********************
         if (t < totalTimerTime && !dancing && !caught && !cutscenePlaying)
