@@ -53,11 +53,14 @@ public class GameManager : MonoBehaviour
     public Transform passenger1Position;
     public GameObject passenger2;
     public Transform passenger2Position;
+    public GameObject passenger3;
+    public Transform passenger3Position;
 
     public static bool cutscenePlaying;
     public static bool cutscene1;
     public static bool cutscene2;
     public static bool cutscene3;
+    public static bool cutscene4;
 
     // Start is called before the first frame update
     void Start()
@@ -123,10 +126,32 @@ public class GameManager : MonoBehaviour
         }
         if (slider.value >= 0.99)
         {
-            if (cutscene3)
+            /*if (cutscene5)
             {
                 winText.gameObject.SetActive(true);
                 win = true;
+            }*/
+            if (cutscene4)
+            {
+                winText.gameObject.SetActive(true);
+                win = true;/*
+                cutscenePlaying = true;
+                slider.value = 0.5f;
+                totalTimerTime = 20f;
+                t = 0f;
+                player.gameObject.GetComponent<PlayerBehavior>().toPreventCheating = false;
+                player.gameObject.GetComponent<PlayerBehavior>().toPreventCheatingNum = 0f;
+                player.gameObject.GetComponent<PlayerBehavior>().cheating = false;*/
+            }
+            else if (cutscene3)
+            {
+                cutscenePlaying = true;
+                slider.value = 0.5f;
+                totalTimerTime = 20f;
+                t = 0f;
+                player.gameObject.GetComponent<PlayerBehavior>().toPreventCheating = false;
+                player.gameObject.GetComponent<PlayerBehavior>().toPreventCheatingNum = 0f;
+                player.gameObject.GetComponent<PlayerBehavior>().cheating = false;
             }
             else if (cutscene2)
             {
@@ -134,6 +159,9 @@ public class GameManager : MonoBehaviour
                 slider.value = 0.5f;
                 totalTimerTime = 20f;
                 t = 0f;
+                player.gameObject.GetComponent<PlayerBehavior>().toPreventCheating = false;
+                player.gameObject.GetComponent<PlayerBehavior>().toPreventCheatingNum = 0f;
+                player.gameObject.GetComponent<PlayerBehavior>().cheating = false;
             }
             else if (cutscene1)
             {
@@ -141,6 +169,9 @@ public class GameManager : MonoBehaviour
                 slider.value = 0.5f;
                 totalTimerTime = 20f;
                 t = 0f;
+                player.gameObject.GetComponent<PlayerBehavior>().toPreventCheating = false;
+                player.gameObject.GetComponent<PlayerBehavior>().toPreventCheatingNum = 0f;
+                player.gameObject.GetComponent<PlayerBehavior>().cheating = false;
             }
         }
         // ***************************************************************
@@ -227,8 +258,8 @@ public class GameManager : MonoBehaviour
                 if (waitBeforeStart >= 6)
                 {
                     invisiWall.gameObject.SetActive(true);
-                    passenger2.gameObject.transform.rotation = left.rotation;
-                    cutscene2 = true;
+                    //passenger2.gameObject.transform.rotation = left.rotation;
+                    cutscene3 = true;
                     cutscenePlaying = false;
                     waitBeforeStart = 0;
                 }
@@ -257,11 +288,52 @@ public class GameManager : MonoBehaviour
                     player.gameObject.transform.rotation = down.rotation;
                     player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
                     passenger2.gameObject.SetActive(true);
-                    passenger2.gameObject.GetComponent<Passenger2>().facingLeft = true;
+                    //passenger2.gameObject.GetComponent<Passenger2>().facingLeft = true;
                     camera1.enabled = false;
                     camera2.enabled = true;
                 }
-
+            }
+            else if (!cutscene4) // FOURTH CUTSCENE ****************************************
+            {
+                waitBeforeStart += Time.deltaTime;
+                if (waitBeforeStart >= 7)
+                {
+                    invisiWall.gameObject.SetActive(true);
+                    //passenger3.gameObject.transform.rotation = left.rotation;
+                    cutscene4 = true;
+                    cutscenePlaying = false;
+                    waitBeforeStart = 0;
+                }
+                else if (waitBeforeStart >= 3)
+                {
+                    camera2.enabled = false;
+                    camera1.enabled = true;
+                    passenger3.gameObject.transform.rotation = right.rotation;
+                    passenger3.gameObject.transform.position = Vector3.MoveTowards(passenger3.gameObject.transform.position, passenger3Position.position, 0.5f);
+                    door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
+                    door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
+                }
+                else if (waitBeforeStart >= 2)
+                {
+                    passenger3.gameObject.transform.Translate(new Vector3(0, 0, 0.5f));
+                }
+                else if (waitBeforeStart >= 1)
+                {
+                    door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1Location.position, 0.1f);
+                    door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2Location.position, 0.1f);
+                    invisiWall.gameObject.SetActive(false);
+                }
+                else if (waitBeforeStart < 1)
+                {
+                    player.gameObject.transform.position = playerPosition.position;
+                    player.gameObject.transform.rotation = down.rotation;
+                    player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
+                    passenger3.gameObject.SetActive(true);
+                    passenger3.gameObject.GetComponent<Passenger2>().isThirdPassenger = true;
+                    //passenger3.gameObject.GetComponent<Passenger2>().facingLeft = true;
+                    camera1.enabled = false;
+                    camera2.enabled = true;
+                }
             }
         }
     }

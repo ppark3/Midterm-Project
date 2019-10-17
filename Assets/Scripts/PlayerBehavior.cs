@@ -82,7 +82,7 @@ public class PlayerBehavior : MonoBehaviour
             {
                 toPreventCheatingNum += Time.deltaTime;
             }
-            if (toPreventCheatingNum >= 3f)
+            if (toPreventCheatingNum >= 2f)
             {
                 toPreventCheating = false;
                 cheating = false;

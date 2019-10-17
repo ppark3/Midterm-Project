@@ -131,7 +131,7 @@ public class Passenger1 : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Vision" &&
+        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name != this.name &&
             Vector3.Distance(this.gameObject.transform.position, other.gameObject.transform.parent.transform.position) <
                 Vector3.Distance(player.gameObject.transform.position, other.gameObject.transform.parent.transform.position))
         {

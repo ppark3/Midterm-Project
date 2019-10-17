@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CanTrigger : MonoBehaviour
 {
+    public Rigidbody canRigidbody;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,10 @@ public class CanTrigger : MonoBehaviour
         {
             other.gameObject.GetComponent<PlayerBehavior>().canPickUp = true;
         }
+        if (other.tag == "Floor")
+        {
+            canRigidbody.isKinematic = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -29,6 +35,11 @@ public class CanTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             other.gameObject.GetComponent<PlayerBehavior>().canPickUp = false;
+        }
+
+        if (other.tag == "Floor")
+        {
+            canRigidbody.isKinematic = false;
         }
     }
 }

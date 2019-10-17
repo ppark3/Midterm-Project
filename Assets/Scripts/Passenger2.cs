@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Passenger2 : MonoBehaviour
 {
+    public bool isThirdPassenger;
+
     public bool facingLeft;
 
     public GameObject player;
@@ -31,7 +33,14 @@ public class Passenger2 : MonoBehaviour
     {
         rotateSpeed = 100f;
         returnRotateSpeed = 80f;
-        neutralLook = passengerLocation.position + transform.right;
+        if (isThirdPassenger)
+        {
+            neutralLook = passengerLocation.position + transform.forward;
+        }
+        else
+        {
+            neutralLook = passengerLocation.position + transform.right;
+        }
     }
 
     // Update is called once per frame
@@ -41,9 +50,12 @@ public class Passenger2 : MonoBehaviour
         {
             // IF THE PLAYER IS DANCING, LOOK AT PLAYER BUT WAIT FIRST
             // IF THE PLAYER DANCES WHILE RETURNING, COMMIT TO LOOK (LOOK WITHOUT WAITING)
-            if ((GameManager.dancing || player.gameObject.GetComponent<PlayerBehavior>().cheating) && !player.gameObject.GetComponent<PlayerBehavior>().canThrown &&
-                    ((player.gameObject.transform.position.x >= this.gameObject.transform.position.x && facingLeft) ||
-                        player.gameObject.transform.position.x <= this.gameObject.transform.position.x && !facingLeft))
+            if ((GameManager.dancing || player.gameObject.GetComponent<PlayerBehavior>().cheating) && 
+                    !player.gameObject.GetComponent<PlayerBehavior>().canThrown &&
+                    ((player.gameObject.transform.position.x >= this.gameObject.transform.position.x /*&& facingLeft) ||
+                        player.gameObject.transform.position.x <= this.gameObject.transform.position.x && !facingLeft)*/ && !isThirdPassenger) ||
+                    (player.gameObject.transform.position.z >= this.gameObject.transform.position.z /*&& facingLeft) ||
+                        player.gameObject.transform.position.z <= this.gameObject.transform.position.z && !facingLeft)*/ && isThirdPassenger)))
             {
                 decideToLook = true;
                 actualTarget = player.gameObject.transform.position;
@@ -132,7 +144,7 @@ public class Passenger2 : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Vision" &&
+        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name != this.name &&
             Vector3.Distance(this.gameObject.transform.position, other.gameObject.transform.parent.transform.position) <
                 Vector3.Distance(player.gameObject.transform.position, other.gameObject.transform.parent.transform.position))
         {
