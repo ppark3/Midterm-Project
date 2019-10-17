@@ -42,6 +42,7 @@ public class Passenger4 : MonoBehaviour
         keepWalking = true;
         facingRight = true;
         walkingSpeed = 0.2f;
+        Physics.IgnoreCollision(can.GetComponent<Collider>(), GetComponent<Collider>());
     }
 
     // Update is called once per frame

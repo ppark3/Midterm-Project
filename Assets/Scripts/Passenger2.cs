@@ -41,6 +41,7 @@ public class Passenger2 : MonoBehaviour
         {
             neutralLook = passengerLocation.position + transform.right;
         }
+        Physics.IgnoreCollision(can.GetComponent<Collider>(), GetComponent<Collider>());
     }
 
     // Update is called once per frame

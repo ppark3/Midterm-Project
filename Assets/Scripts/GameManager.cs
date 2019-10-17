@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
             cutscene4 = false;
             cutscene5 = false;
             cutscene6 = false;
-            SceneManager.LoadScene("StartScreen");
+            SceneManager.LoadScene("StartScene");
         }
         // ********************* CONTROLLING THE BAR *********************
         if (t < totalTimerTime && !dancing && !caught && !cutscenePlaying)
@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
             if (!cutscene1) //FIRST CUTSCENE ****************************************
             {
                 waitBeforeStart += Time.deltaTime;
-                if (waitBeforeStart >= 4)
+                if (waitBeforeStart >= 4.5)
                 {
                     invisiWall.gameObject.SetActive(true);
                     cutscene1 = true;
@@ -356,7 +356,7 @@ public class GameManager : MonoBehaviour
             else if (!cutscene5) // FIFTH CUTSCENE ****************************************
             {
                 waitBeforeStart += Time.deltaTime;
-                if (waitBeforeStart >= 6)
+                if (waitBeforeStart >= 5)
                 {
                     invisiWall.gameObject.SetActive(true);
                     cutscene5 = true;
