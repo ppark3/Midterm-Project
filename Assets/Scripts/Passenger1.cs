@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Passenger1 : MonoBehaviour
 {
+    public bool isFifthPassenger;
+
     public GameObject player;
     public Vector3 actualTarget;
     public GameObject can;
@@ -30,13 +32,20 @@ public class Passenger1 : MonoBehaviour
     {
         rotateSpeed = 120f;
         returnRotateSpeed = 90f;
-        neutralLook = passengerLocation.position + transform.forward;
+        if (isFifthPassenger)
+        {
+            neutralLook = passengerLocation.position + -transform.forward;
+        }
+        else
+        {
+            neutralLook = passengerLocation.position + transform.forward;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.cutscenePlaying)
+        if (!GameManager.cutscenePlaying || GameManager.win)
         {
             // IF THE PLAYER IS DANCING, LOOK AT PLAYER BUT WAIT FIRST
             // IF THE PLAYER DANCES WHILE RETURNING, COMMIT TO LOOK (LOOK WITHOUT WAITING)
@@ -97,7 +106,7 @@ public class Passenger1 : MonoBehaviour
                 }
             }
 
-            if (player.gameObject.GetComponent<PlayerBehavior>().canThrown && !player.gameObject.GetComponent<PlayerBehavior>().pickedUp)
+            if (player.gameObject.GetComponent<PlayerBehavior>().canThrown /*&& !player.gameObject.GetComponent<PlayerBehavior>().pickedUp*/ && !commitToLook)
             {
                 if (!decideToLookAtCan)
                 {
@@ -112,7 +121,7 @@ public class Passenger1 : MonoBehaviour
                 if (decideToLookAtCan)
                 {
                     canTarget = can.gameObject.transform;
-                    Quaternion q = Quaternion.LookRotation((canTarget.position + new Vector3(0, 2.8f, 0)) - transform.position);
+                    Quaternion q = Quaternion.LookRotation((canTarget.position /*+ new Vector3(0, 2.8f, 0)*/) - transform.position);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, q, rotateSpeed * Time.deltaTime);
                     if (Quaternion.Angle(transform.rotation, q) <= 1)
                     {
@@ -129,13 +138,13 @@ public class Passenger1 : MonoBehaviour
         }
     }
 
-    public void OnTriggerStay(Collider other)
+    /*public void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name != this.name &&
             Vector3.Distance(this.gameObject.transform.position, other.gameObject.transform.parent.transform.position) <
                 Vector3.Distance(player.gameObject.transform.position, other.gameObject.transform.parent.transform.position))
         {
-            player.gameObject.GetComponent<PlayerBehavior>().hiding = true;
+            player.gameObject.GetComponent<PlayerBehavior>().hiding1 = true;
         }
     }
 
@@ -143,7 +152,7 @@ public class Passenger1 : MonoBehaviour
     {
         if (other.gameObject.tag == "Vision")
         {
-            player.gameObject.GetComponent<PlayerBehavior>().hiding = false;
+            player.gameObject.GetComponent<PlayerBehavior>().hiding1 = false;
         }
-    }
+    }*/
 }

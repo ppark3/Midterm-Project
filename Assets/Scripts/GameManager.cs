@@ -20,10 +20,8 @@ public class GameManager : MonoBehaviour
     public static bool startSpeedDecrease;
 
     public bool lose;
-    public bool win;
+    public static bool win;
     public GameObject winText;
-
-
 
     // VARIABLES NEEDED FOR CUTSCENE
     public Camera camera1; //camera 1 is used for gameplay
@@ -55,12 +53,18 @@ public class GameManager : MonoBehaviour
     public Transform passenger2Position;
     public GameObject passenger3;
     public Transform passenger3Position;
+    public GameObject passenger4;
+    public Transform passenger4Position;
+    public GameObject passenger5;
+    public Transform passenger5Position;
 
     public static bool cutscenePlaying;
     public static bool cutscene1;
     public static bool cutscene2;
     public static bool cutscene3;
     public static bool cutscene4;
+    public static bool cutscene5;
+    public static bool cutscene6;
 
     // Start is called before the first frame update
     void Start()
@@ -73,12 +77,26 @@ public class GameManager : MonoBehaviour
         door2OriginalLocation = door2.transform.position;
         door3OriginalLocation = door3.transform.position;
         door4OriginalLocation = door4.transform.position;
+
+        // FOR TESTING
+        //cutscene2 = true;
+        //cutscene3 = true;
+        //cutscene4 = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (lose)
+        {
+            cutscene1 = false;
+            cutscene2 = false;
+            cutscene3 = false;
+            cutscene4 = false;
+            cutscene5 = false;
+            cutscene6 = false;
+            SceneManager.LoadScene("SampleScene");
+        }
         // ********************* CONTROLLING THE BAR *********************
         if (t < totalTimerTime && !dancing && !caught && !cutscenePlaying)
         {
@@ -119,29 +137,33 @@ public class GameManager : MonoBehaviour
         if (slider.value <= 0.01)
         {
             lose = true;
-            cutscene3 = false;
-            cutscene2 = false;
-            cutscene1 = false;
-            SceneManager.LoadScene("SampleScene");
         }
         if (slider.value >= 0.99)
         {
-            /*if (cutscene5)
+            if (cutscene6)
             {
                 winText.gameObject.SetActive(true);
                 win = true;
-            }*/
-            if (cutscene4)
+            }
+            else if (cutscene5)
             {
-                winText.gameObject.SetActive(true);
-                win = true;/*
                 cutscenePlaying = true;
                 slider.value = 0.5f;
                 totalTimerTime = 20f;
                 t = 0f;
                 player.gameObject.GetComponent<PlayerBehavior>().toPreventCheating = false;
                 player.gameObject.GetComponent<PlayerBehavior>().toPreventCheatingNum = 0f;
-                player.gameObject.GetComponent<PlayerBehavior>().cheating = false;*/
+                player.gameObject.GetComponent<PlayerBehavior>().cheating = false;
+            }
+            else if (cutscene4)
+            {
+                cutscenePlaying = true;
+                slider.value = 0.5f;
+                totalTimerTime = 20f;
+                t = 0f;
+                player.gameObject.GetComponent<PlayerBehavior>().toPreventCheating = false;
+                player.gameObject.GetComponent<PlayerBehavior>().toPreventCheatingNum = 0f;
+                player.gameObject.GetComponent<PlayerBehavior>().cheating = false;
             }
             else if (cutscene3)
             {
@@ -182,7 +204,7 @@ public class GameManager : MonoBehaviour
             if (!cutscene1) //FIRST CUTSCENE ****************************************
             {
                 waitBeforeStart += Time.deltaTime;
-                if (waitBeforeStart >= 4.5)
+                if (waitBeforeStart >= 4)
                 {
                     invisiWall.gameObject.SetActive(true);
                     cutscene1 = true;
@@ -216,7 +238,7 @@ public class GameManager : MonoBehaviour
             else if (!cutscene2) //SECOND CUTSCENE ****************************************
             {
                 waitBeforeStart += Time.deltaTime;
-                if (waitBeforeStart >= 4.5)
+                if (waitBeforeStart >= 5)
                 {
                     invisiWall.gameObject.SetActive(true);
                     cutscene2 = true;
@@ -258,7 +280,6 @@ public class GameManager : MonoBehaviour
                 if (waitBeforeStart >= 6)
                 {
                     invisiWall.gameObject.SetActive(true);
-                    //passenger2.gameObject.transform.rotation = left.rotation;
                     cutscene3 = true;
                     cutscenePlaying = false;
                     waitBeforeStart = 0;
@@ -288,7 +309,6 @@ public class GameManager : MonoBehaviour
                     player.gameObject.transform.rotation = down.rotation;
                     player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
                     passenger2.gameObject.SetActive(true);
-                    //passenger2.gameObject.GetComponent<Passenger2>().facingLeft = true;
                     camera1.enabled = false;
                     camera2.enabled = true;
                 }
@@ -299,7 +319,6 @@ public class GameManager : MonoBehaviour
                 if (waitBeforeStart >= 7)
                 {
                     invisiWall.gameObject.SetActive(true);
-                    //passenger3.gameObject.transform.rotation = left.rotation;
                     cutscene4 = true;
                     cutscenePlaying = false;
                     waitBeforeStart = 0;
@@ -330,7 +349,85 @@ public class GameManager : MonoBehaviour
                     player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
                     passenger3.gameObject.SetActive(true);
                     passenger3.gameObject.GetComponent<Passenger2>().isThirdPassenger = true;
-                    //passenger3.gameObject.GetComponent<Passenger2>().facingLeft = true;
+                    camera1.enabled = false;
+                    camera2.enabled = true;
+                }
+            }
+            else if (!cutscene5) // FIFTH CUTSCENE ****************************************
+            {
+                waitBeforeStart += Time.deltaTime;
+                if (waitBeforeStart >= 6)
+                {
+                    invisiWall.gameObject.SetActive(true);
+                    cutscene5 = true;
+                    cutscenePlaying = false;
+                    waitBeforeStart = 0;
+                }
+                else if (waitBeforeStart >= 3)
+                {
+                    camera2.enabled = false;
+                    camera1.enabled = true;
+                    passenger4.gameObject.transform.rotation = right.rotation;
+                    passenger4.gameObject.transform.position = Vector3.MoveTowards(passenger4.gameObject.transform.position, passenger4Position.position, 0.5f);
+                    door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
+                    door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
+                }
+                else if (waitBeforeStart >= 2)
+                {
+                    passenger4.gameObject.transform.Translate(new Vector3(0, 0, 0.5f));
+                }
+                else if (waitBeforeStart >= 1)
+                {
+                    door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1Location.position, 0.1f);
+                    door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2Location.position, 0.1f);
+                    invisiWall.gameObject.SetActive(false);
+                }
+                else if (waitBeforeStart < 1)
+                {
+                    player.gameObject.transform.position = playerPosition.position;
+                    player.gameObject.transform.rotation = down.rotation;
+                    player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
+                    passenger4.gameObject.SetActive(true);
+                    camera1.enabled = false;
+                    camera2.enabled = true;
+                }
+            }
+            else if (!cutscene6) // SIXTH CUTSCENE ****************************************
+            {
+                waitBeforeStart += Time.deltaTime;
+                if (waitBeforeStart >= 5)
+                {
+                    invisiWall.gameObject.SetActive(true);
+                    cutscene6 = true;
+                    cutscenePlaying = false;
+                    waitBeforeStart = 0;
+                }
+                else if (waitBeforeStart >= 3)
+                {
+                    camera2.enabled = false;
+                    camera1.enabled = true;
+                    passenger5.gameObject.transform.rotation = right.rotation;
+                    passenger5.gameObject.transform.position = Vector3.MoveTowards(passenger5.gameObject.transform.position, passenger5Position.position, 0.5f);
+                    door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
+                    door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
+                }
+                else if (waitBeforeStart >= 2)
+                {
+                    passenger5.gameObject.transform.Translate(new Vector3(0, 0, 0.5f));
+                }
+                else if (waitBeforeStart >= 1)
+                {
+                    door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1Location.position, 0.1f);
+                    door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2Location.position, 0.1f);
+                    invisiWall.gameObject.SetActive(false);
+                }
+                else if (waitBeforeStart < 1)
+                {
+                    player.gameObject.transform.position = playerPosition.position;
+                    player.gameObject.transform.rotation = down.rotation;
+                    player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
+                    passenger5.gameObject.SetActive(true);
+                    passenger5.gameObject.GetComponent<Passenger1>().isFifthPassenger = true;
                     camera1.enabled = false;
                     camera2.enabled = true;
                 }

@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Passenger2 : MonoBehaviour
+public class Passenger4 : MonoBehaviour
 {
-    public bool isThirdPassenger;
-
-    public bool facingLeft;
-
     public GameObject player;
     public Vector3 actualTarget;
     public GameObject can;
@@ -18,7 +14,7 @@ public class Passenger2 : MonoBehaviour
     public bool returning;
 
     public bool decideToLookAtCan;
-
+    
     public float rotateSpeed;
     public float returnRotateSpeed;
     public Vector3 neutralLook;
@@ -26,21 +22,26 @@ public class Passenger2 : MonoBehaviour
 
     public float waitBeforeLook;
     public float waitBeforeReturn;
+    public float waitBeforeCanReturn;
     public float distance;
+
+    // WALKING PASSENGER EXCLUSIVE VARIABLES
+    public float walkingSpeed;
+    public Transform leftLocation;
+    public Transform rightLocation;
+    public bool facingRight;
+    public bool keepWalking;
+    public float waitingTimeToRotate;
 
     // Start is called before the first frame update
     void Start()
     {
-        rotateSpeed = 100f;
-        returnRotateSpeed = 80f;
-        if (isThirdPassenger)
-        {
-            neutralLook = passengerLocation.position + transform.forward;
-        }
-        else
-        {
-            neutralLook = passengerLocation.position + transform.right;
-        }
+        rotateSpeed = 120f;
+        returnRotateSpeed = 120f;
+        neutralLook = passengerLocation.position + -transform.right;
+        keepWalking = true;
+        facingRight = true;
+        walkingSpeed = 0.2f;
     }
 
     // Update is called once per frame
@@ -50,10 +51,8 @@ public class Passenger2 : MonoBehaviour
         {
             // IF THE PLAYER IS DANCING, LOOK AT PLAYER BUT WAIT FIRST
             // IF THE PLAYER DANCES WHILE RETURNING, COMMIT TO LOOK (LOOK WITHOUT WAITING)
-            if ((GameManager.dancing || player.gameObject.GetComponent<PlayerBehavior>().cheating) && 
-                    !player.gameObject.GetComponent<PlayerBehavior>().canThrown &&
-                    ((player.gameObject.transform.position.x >= this.gameObject.transform.position.x && !isThirdPassenger) ||
-                    (player.gameObject.transform.position.z >= this.gameObject.transform.position.z && isThirdPassenger)))
+            if ((GameManager.dancing || player.gameObject.GetComponent<PlayerBehavior>().cheating)
+                 && !player.gameObject.GetComponent<PlayerBehavior>().canThrown)
             {
                 decideToLook = true;
                 actualTarget = player.gameObject.transform.position;
@@ -79,6 +78,7 @@ public class Passenger2 : MonoBehaviour
                 {
                     waitBeforeLook = 0;
                     commitToLook = true;
+                    keepWalking = false;
                 }
                 if (commitToLook)
                 {
@@ -96,20 +96,61 @@ public class Passenger2 : MonoBehaviour
                 }
             }
             // RETURN TO REGULAR LOOKING POSITION
-            else if (!player.gameObject.GetComponent<PlayerBehavior>().canThrown)
+            else if ((!player.gameObject.GetComponent<PlayerBehavior>().canThrown || player.gameObject.GetComponent<PlayerBehavior>().pickedUp) 
+                        && !keepWalking)
             {
                 waitBeforeReturn = 0;
+                waitBeforeCanReturn = 0f;
                 Quaternion q = Quaternion.LookRotation(neutralLook - transform.position);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, q, returnRotateSpeed * Time.deltaTime);
                 if (Quaternion.Angle(transform.rotation, q) <= 1f)
                 {
                     returning = false;
                     waitBeforeLook = 0f;
+                    keepWalking = true;
+                }
+            }
+
+            if (keepWalking && !returning)
+            {
+                if (facingRight)
+                {
+                    neutralLook = rightLocation.position;
+                    this.transform.position = Vector3.MoveTowards(this.transform.position, rightLocation.position, walkingSpeed);
+                    if (Vector3.Distance(transform.position, rightLocation.position) <= 0.05f)
+                    {
+                        Quaternion q = Quaternion.LookRotation(leftLocation.position - transform.position);
+                        transform.rotation = Quaternion.RotateTowards(transform.rotation, q, returnRotateSpeed * Time.deltaTime);
+                        if (Quaternion.Angle(transform.rotation, q) <= 1f)
+                        {
+                            facingRight = false;
+                            Debug.Log("This is: " + leftLocation.position);
+                            Debug.Log(leftLocation.position + transform.right);
+                        }
+                    }
+                }
+                else
+                {
+                    neutralLook = leftLocation.position;
+                    this.transform.position = Vector3.MoveTowards(this.transform.position, leftLocation.position, walkingSpeed);
+                    if (Vector3.Distance(transform.position, leftLocation.position) <= 0.05f)
+                    {
+                        Quaternion q = Quaternion.LookRotation(rightLocation.position - transform.position);
+                        transform.rotation = Quaternion.RotateTowards(transform.rotation, q, returnRotateSpeed * Time.deltaTime);
+                        if (Quaternion.Angle(transform.rotation, q) <= 1f)
+                        {
+                            facingRight = true;
+                            Debug.Log("This is: " + rightLocation.position);
+                            Debug.Log(rightLocation.position + transform.right);
+                        }
+                    }
                 }
             }
 
             if (player.gameObject.GetComponent<PlayerBehavior>().canThrown /*&& !player.gameObject.GetComponent<PlayerBehavior>().pickedUp*/ && !commitToLook)
             {
+                keepWalking = false;
+
                 if (!decideToLookAtCan)
                 {
                     waitBeforeLook += Time.deltaTime;
@@ -127,8 +168,8 @@ public class Passenger2 : MonoBehaviour
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, q, rotateSpeed * Time.deltaTime);
                     if (Quaternion.Angle(transform.rotation, q) <= 1)
                     {
-                        waitBeforeReturn += Time.deltaTime;
-                        if (waitBeforeReturn >= 4f)
+                        waitBeforeCanReturn += Time.deltaTime;
+                        if (waitBeforeCanReturn >= 4f)
                         {
                             player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
                             decideToLookAtCan = false;
@@ -140,66 +181,21 @@ public class Passenger2 : MonoBehaviour
         }
     }
 
-    public void OnTriggerStay(Collider other)
+    /*public void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name != this.name 
-            && other.gameObject.transform.parent.name == "Passenger1" &&
-            Vector3.Distance(this.gameObject.transform.position, other.gameObject.transform.parent.transform.position) <
-                Vector3.Distance(player.gameObject.transform.position, other.gameObject.transform.parent.transform.position))
-        {
-            player.gameObject.GetComponent<PlayerBehavior>().hiding1 = true;
-        }
-        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name != this.name
-            && other.gameObject.transform.parent.name == "Passenger2" &&
-            Vector3.Distance(this.gameObject.transform.position, other.gameObject.transform.parent.transform.position) <
-                Vector3.Distance(player.gameObject.transform.position, other.gameObject.transform.parent.transform.position))
-        {
-            player.gameObject.GetComponent<PlayerBehavior>().hiding2 = true;
-        }
-        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name != this.name
-            && other.gameObject.transform.parent.name == "Passenger3" &&
-            Vector3.Distance(this.gameObject.transform.position, other.gameObject.transform.parent.transform.position) <
-                Vector3.Distance(player.gameObject.transform.position, other.gameObject.transform.parent.transform.position))
-        {
-            player.gameObject.GetComponent<PlayerBehavior>().hiding3 = true;
-        }
-        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name != this.name
-            && other.gameObject.transform.parent.name == "Passenger4" &&
+        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name != this.name &&
             Vector3.Distance(this.gameObject.transform.position, other.gameObject.transform.parent.transform.position) <
                 Vector3.Distance(player.gameObject.transform.position, other.gameObject.transform.parent.transform.position))
         {
             player.gameObject.GetComponent<PlayerBehavior>().hiding4 = true;
         }
-        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name != this.name
-            && other.gameObject.transform.parent.name == "Passenger5" &&
-            Vector3.Distance(this.gameObject.transform.position, other.gameObject.transform.parent.transform.position) <
-                Vector3.Distance(player.gameObject.transform.position, other.gameObject.transform.parent.transform.position))
-        {
-            player.gameObject.GetComponent<PlayerBehavior>().hiding5 = true;
-        }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name == "Passenger1")
-        {
-            player.gameObject.GetComponent<PlayerBehavior>().hiding1 = false;
-        }
-        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name == "Passenger2")
-        {
-            player.gameObject.GetComponent<PlayerBehavior>().hiding2 = false;
-        }
-        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name == "Passenger3")
-        {
-            player.gameObject.GetComponent<PlayerBehavior>().hiding3 = false;
-        }
-        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name == "Passenger4")
+        if (other.gameObject.tag == "Vision")
         {
             player.gameObject.GetComponent<PlayerBehavior>().hiding4 = false;
         }
-        if (other.gameObject.tag == "Vision" && other.gameObject.transform.parent.name == "Passenger5")
-        {
-            player.gameObject.GetComponent<PlayerBehavior>().hiding5 = false;
-        }
-    }
+    }*/
 }

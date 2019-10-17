@@ -9,7 +9,11 @@ public class PlayerBehavior : MonoBehaviour
     public GameObject musicManager;
 
     public bool caught;
-    public bool hiding;
+    public bool hiding1;
+    public bool hiding2;
+    public bool hiding3;
+    public bool hiding4;
+    public bool hiding5;
     public bool toPreventCheating;
     public float toPreventCheatingNum;
     public bool cheating;
@@ -34,7 +38,7 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.cutscenePlaying)
+        if (!GameManager.cutscenePlaying || GameManager.win)
         {
             if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.z >= -15) // moving up
             {
@@ -123,9 +127,9 @@ public class PlayerBehavior : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Vision")
+        if (other.tag == "Vision" && other.gameObject.transform.parent.name == "Passenger1")
         {
-            if (Input.GetKeyDown(KeyCode.J) && !hiding)
+            if (Input.GetKeyDown(KeyCode.J) && !hiding1)
             {
                 caught = true;
                 musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
@@ -134,7 +138,91 @@ public class PlayerBehavior : MonoBehaviour
                 GameManager.caught = true;
                 GameManager.startSpeedDecrease = true;
             }
-            if (Input.GetKey(KeyCode.J) && !caught && !hiding)
+            if (Input.GetKey(KeyCode.J) && !caught && !hiding1)
+            {
+                caught = true;
+                musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
+                musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+                musicManager.gameObject.GetComponent<MusicManager>().goodPlaying = false;
+                GameManager.caught = true;
+                GameManager.startSpeedDecrease = true;
+            }
+        }
+        if (other.tag == "Vision" && other.gameObject.transform.parent.name == "Passenger2")
+        {
+            if (Input.GetKeyDown(KeyCode.J) && !hiding2)
+            {
+                caught = true;
+                musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
+                musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+                musicManager.gameObject.GetComponent<MusicManager>().goodPlaying = false;
+                GameManager.caught = true;
+                GameManager.startSpeedDecrease = true;
+            }
+            if (Input.GetKey(KeyCode.J) && !caught && !hiding2)
+            {
+                caught = true;
+                musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
+                musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+                musicManager.gameObject.GetComponent<MusicManager>().goodPlaying = false;
+                GameManager.caught = true;
+                GameManager.startSpeedDecrease = true;
+            }
+        }
+        if (other.tag == "Vision" && other.gameObject.transform.parent.name == "Passenger3")
+        {
+            if (Input.GetKeyDown(KeyCode.J) && !hiding3)
+            {
+                caught = true;
+                musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
+                musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+                musicManager.gameObject.GetComponent<MusicManager>().goodPlaying = false;
+                GameManager.caught = true;
+                GameManager.startSpeedDecrease = true;
+            }
+            if (Input.GetKey(KeyCode.J) && !caught && !hiding3)
+            {
+                caught = true;
+                musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
+                musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+                musicManager.gameObject.GetComponent<MusicManager>().goodPlaying = false;
+                GameManager.caught = true;
+                GameManager.startSpeedDecrease = true;
+            }
+        }
+        if (other.tag == "Vision" && other.gameObject.transform.parent.name == "Passenger4")
+        {
+            if (Input.GetKeyDown(KeyCode.J) && !hiding4)
+            {
+                caught = true;
+                musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
+                musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+                musicManager.gameObject.GetComponent<MusicManager>().goodPlaying = false;
+                GameManager.caught = true;
+                GameManager.startSpeedDecrease = true;
+            }
+            if (Input.GetKey(KeyCode.J) && !caught && !hiding4)
+            {
+                caught = true;
+                musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
+                musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+                musicManager.gameObject.GetComponent<MusicManager>().goodPlaying = false;
+                GameManager.caught = true;
+                GameManager.startSpeedDecrease = true;
+            }
+        }
+        if (other.tag == "Vision" && other.gameObject.transform.parent.name == "Passenger5")
+        {
+            if (Input.GetKeyDown(KeyCode.J) && !hiding5)
+            {
+                caught = true;
+                musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
+                musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+                musicManager.gameObject.GetComponent<MusicManager>().goodPlaying = false;
+                GameManager.caught = true;
+                GameManager.startSpeedDecrease = true;
+            }
+            if (Input.GetKey(KeyCode.J) && !caught && !hiding5)
             {
                 caught = true;
                 musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
