@@ -41,6 +41,14 @@ public class GameManager : MonoBehaviour
     public Vector3 door4OriginalLocation;
     public float waitBeforeStart;
 
+    public GameObject textbox;
+    public GameObject text1;
+    public GameObject text2;
+    public GameObject text3;
+    public GameObject text4;
+    public GameObject text5;
+    public GameObject text6;
+
     public Transform up;
     public Transform down;
     public Transform left;
@@ -204,12 +212,14 @@ public class GameManager : MonoBehaviour
             if (!cutscene1) //FIRST CUTSCENE ****************************************
             {
                 waitBeforeStart += Time.deltaTime;
-                if (waitBeforeStart >= 4.5)
+                if (waitBeforeStart >= 4.5 && text1.GetComponent<ScrollText>().displayed && Input.GetKeyDown(KeyCode.Space))
                 {
                     invisiWall.gameObject.SetActive(true);
                     cutscene1 = true;
                     cutscenePlaying = false;
                     waitBeforeStart = 0;
+                    textbox.SetActive(false);
+                    text1.SetActive(false);
                 }
                 else if (waitBeforeStart >= 3)
                 {
@@ -218,6 +228,12 @@ public class GameManager : MonoBehaviour
                     player.gameObject.transform.position = Vector3.MoveTowards(player.gameObject.transform.position, playerPosition.position, 0.5f);
                     door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
                     door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
+                    textbox.SetActive(true);
+                    text1.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        text1.GetComponent<ScrollText>().cancelTyping = true;
+                    }
                 }
                 else if (waitBeforeStart >= 2)
                 {
@@ -238,12 +254,14 @@ public class GameManager : MonoBehaviour
             else if (!cutscene2) //SECOND CUTSCENE ****************************************
             {
                 waitBeforeStart += Time.deltaTime;
-                if (waitBeforeStart >= 5)
+                if (waitBeforeStart >= 5 && text2.GetComponent<ScrollText>().displayed && Input.GetKeyDown(KeyCode.Space))
                 {
                     invisiWall.gameObject.SetActive(true);
                     cutscene2 = true;
                     cutscenePlaying = false;
                     waitBeforeStart = 0;
+                    textbox.SetActive(false);
+                    text2.SetActive(false);
                 }
                 else if (waitBeforeStart >= 3)
                 {
@@ -253,6 +271,12 @@ public class GameManager : MonoBehaviour
                     passenger1.gameObject.transform.position = Vector3.MoveTowards(passenger1.gameObject.transform.position, passenger1Position.position, 0.5f);
                     door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
                     door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
+                    textbox.SetActive(true);
+                    text2.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        text2.GetComponent<ScrollText>().cancelTyping = true;
+                    }
                 }
                 else if (waitBeforeStart >= 2)
                 {
@@ -277,12 +301,14 @@ public class GameManager : MonoBehaviour
             else if (!cutscene3) // THIRD CUTSCENE ****************************************
             {
                 waitBeforeStart += Time.deltaTime;
-                if (waitBeforeStart >= 6)
+                if (waitBeforeStart >= 6 && text3.GetComponent<ScrollText>().displayed && Input.GetKeyDown(KeyCode.Space))
                 {
                     invisiWall.gameObject.SetActive(true);
                     cutscene3 = true;
                     cutscenePlaying = false;
                     waitBeforeStart = 0;
+                    textbox.SetActive(false);
+                    text3.SetActive(false);
                 }
                 else if (waitBeforeStart >= 3)
                 {
@@ -292,6 +318,12 @@ public class GameManager : MonoBehaviour
                     passenger2.gameObject.transform.position = Vector3.MoveTowards(passenger2.gameObject.transform.position, passenger2Position.position, 0.5f);
                     door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
                     door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
+                    textbox.SetActive(true);
+                    text3.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        text3.GetComponent<ScrollText>().cancelTyping = true;
+                    }
                 }
                 else if (waitBeforeStart >= 2)
                 {
@@ -316,12 +348,14 @@ public class GameManager : MonoBehaviour
             else if (!cutscene4) // FOURTH CUTSCENE ****************************************
             {
                 waitBeforeStart += Time.deltaTime;
-                if (waitBeforeStart >= 7)
+                if (waitBeforeStart >= 7 && text4.GetComponent<ScrollText>().displayed && Input.GetKeyDown(KeyCode.Space))
                 {
                     invisiWall.gameObject.SetActive(true);
                     cutscene4 = true;
                     cutscenePlaying = false;
                     waitBeforeStart = 0;
+                    textbox.SetActive(false);
+                    text4.SetActive(false);
                 }
                 else if (waitBeforeStart >= 3)
                 {
@@ -331,6 +365,12 @@ public class GameManager : MonoBehaviour
                     passenger3.gameObject.transform.position = Vector3.MoveTowards(passenger3.gameObject.transform.position, passenger3Position.position, 0.5f);
                     door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
                     door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
+                    textbox.SetActive(true);
+                    text4.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        text4.GetComponent<ScrollText>().cancelTyping = true;
+                    }
                 }
                 else if (waitBeforeStart >= 2)
                 {
@@ -356,12 +396,14 @@ public class GameManager : MonoBehaviour
             else if (!cutscene5) // FIFTH CUTSCENE ****************************************
             {
                 waitBeforeStart += Time.deltaTime;
-                if (waitBeforeStart >= 5)
+                if (waitBeforeStart >= 5 && text5.GetComponent<ScrollText>().displayed && Input.GetKeyDown(KeyCode.Space))
                 {
                     invisiWall.gameObject.SetActive(true);
                     cutscene5 = true;
                     cutscenePlaying = false;
                     waitBeforeStart = 0;
+                    textbox.SetActive(false);
+                    text5.SetActive(false);
                 }
                 else if (waitBeforeStart >= 3)
                 {
@@ -371,6 +413,12 @@ public class GameManager : MonoBehaviour
                     passenger4.gameObject.transform.position = Vector3.MoveTowards(passenger4.gameObject.transform.position, passenger4Position.position, 0.5f);
                     door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
                     door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
+                    textbox.SetActive(true);
+                    text5.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        text5.GetComponent<ScrollText>().cancelTyping = true;
+                    }
                 }
                 else if (waitBeforeStart >= 2)
                 {
@@ -395,12 +443,14 @@ public class GameManager : MonoBehaviour
             else if (!cutscene6) // SIXTH CUTSCENE ****************************************
             {
                 waitBeforeStart += Time.deltaTime;
-                if (waitBeforeStart >= 5)
+                if (waitBeforeStart >= 5 && text6.GetComponent<ScrollText>().displayed && Input.GetKeyDown(KeyCode.Space))
                 {
                     invisiWall.gameObject.SetActive(true);
                     cutscene6 = true;
                     cutscenePlaying = false;
                     waitBeforeStart = 0;
+                    textbox.SetActive(false);
+                    text6.SetActive(false);
                 }
                 else if (waitBeforeStart >= 3)
                 {
@@ -410,6 +460,12 @@ public class GameManager : MonoBehaviour
                     passenger5.gameObject.transform.position = Vector3.MoveTowards(passenger5.gameObject.transform.position, passenger5Position.position, 0.5f);
                     door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
                     door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
+                    textbox.SetActive(true);
+                    text6.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        text6.GetComponent<ScrollText>().cancelTyping = true;
+                    }
                 }
                 else if (waitBeforeStart >= 2)
                 {
