@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public GameObject musicManager;
     public static bool win;
     public GameObject winText;
+    public GameObject can;
 
     // VARIABLES NEEDED FOR CUTSCENE
     public Camera camera1; //camera 1 is used for gameplay
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
     public static bool cutscene4;
     public static bool cutscene5;
     public static bool cutscene6;
+    public static bool cutscene7;
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +96,26 @@ public class GameManager : MonoBehaviour
         laughtrack.SetActive(false);
         textbox.SetActive(false);
         loseText.SetActive(false);
+        win = false;
+
+        cutscene1 = false;
+        cutscene2 = false;
+        cutscene3 = false;
+        cutscene4 = false;
+        cutscene5 = false;
+        cutscene6 = false;
+        cutscene7 = false;
+
+        /*cutscene1 = true;
+        cutscene2 = true;
+        cutscene3 = true;
+        cutscene4 = true;
+        cutscene5 = true;
+        cutscene6 = true;
+        cutscene7 = false;
+        win = true;*/
+
+
     }
 
     // Update is called once per frame
@@ -107,6 +129,7 @@ public class GameManager : MonoBehaviour
             cutscene4 = false;
             cutscene5 = false;
             cutscene6 = false;
+            cutscene7 = false;
             textbox.SetActive(true);
             loseText.SetActive(true);
             laughtrack.SetActive(true);
@@ -143,7 +166,7 @@ public class GameManager : MonoBehaviour
                 value = slider.value;
                 startIncrease = false;
                 t = 0f;
-                totalTimerTime = 2f * (1 - slider.value);
+                totalTimerTime = 20f * (1 - slider.value);
             }
             slider.value = Mathf.Lerp(value, 1, Mathf.Min(1, t / totalTimerTime));
             t += Time.deltaTime;
@@ -170,8 +193,9 @@ public class GameManager : MonoBehaviour
         {
             if (cutscene6)
             {
-                winText.gameObject.SetActive(true);
                 win = true;
+
+                cutscenePlaying = true;
             }
             else if (cutscene5)
             {
@@ -229,7 +253,10 @@ public class GameManager : MonoBehaviour
         // ********************* CONTROLLING CUTSCENES *********************
         if (cutscenePlaying)
         {
-            mainLight.GetComponent<LightController>().changeColors = false;
+            if (!cutscene6)
+            {
+                mainLight.GetComponent<LightController>().changeColors = false;
+            }
             spotlight.gameObject.SetActive(false);
             if (!cutscene1) //FIRST CUTSCENE ****************************************
             {
@@ -513,6 +540,50 @@ public class GameManager : MonoBehaviour
                     passenger5.gameObject.GetComponent<Passenger1>().isFifthPassenger = true;
                     camera1.enabled = false;
                     camera2.enabled = true;
+                }
+            }
+            else if(!cutscene7) 
+            {
+                waitBeforeStart += Time.deltaTime;
+
+                if (waitBeforeStart >= 5)
+                {
+                    if (Input.GetKeyDown(KeyCode.R))
+                    {
+                        SceneManager.LoadScene("StartScene");
+                    }
+                }
+                else if (waitBeforeStart >= 4.5)
+                {
+                    winText.gameObject.SetActive(true);
+                }
+                else if (waitBeforeStart >= 3)
+                {
+                    door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
+                    door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
+                }
+                else if (waitBeforeStart >= 1)
+                {
+                    door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1Location.position, 0.1f);
+                    door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2Location.position, 0.1f);
+                    invisiWall.gameObject.SetActive(false);
+                    player.gameObject.transform.Translate(new Vector3(0, 0, 0.5f));
+                }
+                else if (waitBeforeStart < 1)
+                {
+                    passenger1.SetActive(false);
+                    passenger2.SetActive(false);
+                    passenger3.SetActive(false);
+                    passenger4.SetActive(false);
+                    passenger5.SetActive(false);
+                    can.SetActive(false);
+                    camera1.enabled = false;
+                    camera2.enabled = true;
+                    player.gameObject.transform.position = playerPosition.position;
+                    player.gameObject.transform.rotation = up.rotation;
+                    player.gameObject.GetComponent<PlayerBehavior>().playerModel.GetComponent<Animator>().SetBool("isDancing", true);
+                    mainLight.GetComponent<LightController>().changeColors = true;
+                    musicManager.gameObject.GetComponent<MusicManager>().goodDancing = true;
                 }
             }
         }

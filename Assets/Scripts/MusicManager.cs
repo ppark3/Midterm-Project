@@ -50,7 +50,6 @@ public class MusicManager : MonoBehaviour
         if (badPlaying && !goodDancing)
         {
             badSongTime = audioSource.time;
-
         }
         if (!goodDancing && !badDancing)
         {

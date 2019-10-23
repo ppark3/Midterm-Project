@@ -40,7 +40,7 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.cutscenePlaying && !GameManager.lose)
+        if (!GameManager.cutscenePlaying && !GameManager.lose && !GameManager.win)
         {
             if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.z >= -15) // moving up
             {
@@ -119,7 +119,10 @@ public class PlayerBehavior : MonoBehaviour
         }
         else
         {
-            musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+            if (!GameManager.win)
+            {
+                musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+            }
             if (!GameManager.lose)
             {
                 musicManager.gameObject.GetComponent<MusicManager>().badDancing = false;

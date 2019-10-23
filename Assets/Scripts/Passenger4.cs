@@ -125,8 +125,6 @@ public class Passenger4 : MonoBehaviour
                         if (Quaternion.Angle(transform.rotation, q) <= 1f)
                         {
                             facingRight = false;
-                            Debug.Log("This is: " + leftLocation.position);
-                            Debug.Log(leftLocation.position + transform.right);
                         }
                     }
                 }
@@ -141,8 +139,6 @@ public class Passenger4 : MonoBehaviour
                         if (Quaternion.Angle(transform.rotation, q) <= 1f)
                         {
                             facingRight = true;
-                            Debug.Log("This is: " + rightLocation.position);
-                            Debug.Log(rightLocation.position + transform.right);
                         }
                     }
                 }
