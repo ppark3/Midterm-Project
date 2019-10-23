@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     // VARIABLES NEEDED FOR BAR
     public Slider slider;
     public float totalTimerTime;
@@ -18,6 +17,9 @@ public class GameManager : MonoBehaviour
     public static bool startIncrease;
     public static bool startDecrease;
     public static bool startSpeedDecrease;
+
+    public GameObject mainLight;
+    public GameObject spotlight;
 
     public bool lose;
     public static bool win;
@@ -110,6 +112,8 @@ public class GameManager : MonoBehaviour
         {
             if (startDecrease)
             {
+                mainLight.GetComponent<LightController>().changeColors = false;
+                spotlight.gameObject.SetActive(false);
                 value = slider.value;
                 startDecrease = false;
                 t = 0f;
@@ -122,6 +126,8 @@ public class GameManager : MonoBehaviour
         {
             if (startIncrease)
             {
+                mainLight.GetComponent<LightController>().changeColors = true;
+                spotlight.gameObject.SetActive(true);
                 value = slider.value;
                 startIncrease = false;
                 t = 0f;
@@ -134,6 +140,8 @@ public class GameManager : MonoBehaviour
         {
             if (startSpeedDecrease)
             {
+                mainLight.GetComponent<LightController>().changeColors = false;
+                spotlight.gameObject.SetActive(false);
                 value = slider.value;
                 startSpeedDecrease = false;
                 t = 0f;
@@ -209,6 +217,8 @@ public class GameManager : MonoBehaviour
         // ********************* CONTROLLING CUTSCENES *********************
         if (cutscenePlaying)
         {
+            mainLight.GetComponent<LightController>().changeColors = false;
+            spotlight.gameObject.SetActive(false);
             if (!cutscene1) //FIRST CUTSCENE ****************************************
             {
                 waitBeforeStart += Time.deltaTime;
