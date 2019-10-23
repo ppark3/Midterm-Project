@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
+    public GameObject playerModel;
+
     public float moveSpeed;
 
     public GameObject musicManager;
@@ -62,6 +64,7 @@ public class PlayerBehavior : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.J) && !caught)
             {
+                playerModel.GetComponent<Animator>().SetBool("isDancing", true);
                 if (toPreventCheatingNum <= 1f)
                 {
                     cheating = true;
@@ -73,6 +76,7 @@ public class PlayerBehavior : MonoBehaviour
             }
             if (Input.GetKeyUp(KeyCode.J) || GameManager.cutscenePlaying)
             {
+                playerModel.GetComponent<Animator>().SetBool("isDancing", false);
                 toPreventCheating = true;
                 musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
                 musicManager.gameObject.GetComponent<MusicManager>().badDancing = false;

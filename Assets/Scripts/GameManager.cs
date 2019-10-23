@@ -293,6 +293,7 @@ public class GameManager : MonoBehaviour
                     player.gameObject.transform.position = playerPosition.position;
                     player.gameObject.transform.rotation = down.rotation;
                     player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
+                    player.gameObject.GetComponent<PlayerBehavior>().playerModel.GetComponent<Animator>().SetBool("isDancing", false);
                     passenger1.gameObject.SetActive(true);
                     camera1.enabled = false;
                     camera2.enabled = true;
@@ -340,6 +341,7 @@ public class GameManager : MonoBehaviour
                     player.gameObject.transform.position = playerPosition.position;
                     player.gameObject.transform.rotation = down.rotation;
                     player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
+                    player.gameObject.GetComponent<PlayerBehavior>().playerModel.GetComponent<Animator>().SetBool("isDancing", false);
                     passenger2.gameObject.SetActive(true);
                     camera1.enabled = false;
                     camera2.enabled = true;
@@ -387,6 +389,7 @@ public class GameManager : MonoBehaviour
                     player.gameObject.transform.position = playerPosition.position;
                     player.gameObject.transform.rotation = down.rotation;
                     player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
+                    player.gameObject.GetComponent<PlayerBehavior>().playerModel.GetComponent<Animator>().SetBool("isDancing", false);
                     passenger3.gameObject.SetActive(true);
                     passenger3.gameObject.GetComponent<Passenger2>().isThirdPassenger = true;
                     camera1.enabled = false;
@@ -435,6 +438,7 @@ public class GameManager : MonoBehaviour
                     player.gameObject.transform.position = playerPosition.position;
                     player.gameObject.transform.rotation = down.rotation;
                     player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
+                    player.gameObject.GetComponent<PlayerBehavior>().playerModel.GetComponent<Animator>().SetBool("isDancing", false);
                     passenger4.gameObject.SetActive(true);
                     camera1.enabled = false;
                     camera2.enabled = true;
@@ -482,6 +486,7 @@ public class GameManager : MonoBehaviour
                     player.gameObject.transform.position = playerPosition.position;
                     player.gameObject.transform.rotation = down.rotation;
                     player.gameObject.GetComponent<PlayerBehavior>().canThrown = false;
+                    player.gameObject.GetComponent<PlayerBehavior>().playerModel.GetComponent<Animator>().SetBool("isDancing", false);
                     passenger5.gameObject.SetActive(true);
                     passenger5.gameObject.GetComponent<Passenger1>().isFifthPassenger = true;
                     camera1.enabled = false;
