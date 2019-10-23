@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
     public GameObject mainLight;
     public GameObject spotlight;
 
-    public bool lose;
+    public static bool lose;
+    public GameObject laughtrack;
+    public GameObject musicManager;
     public static bool win;
     public GameObject winText;
 
@@ -50,6 +52,7 @@ public class GameManager : MonoBehaviour
     public GameObject text4;
     public GameObject text5;
     public GameObject text6;
+    public GameObject loseText;
 
     public Transform up;
     public Transform down;
@@ -87,11 +90,10 @@ public class GameManager : MonoBehaviour
         door2OriginalLocation = door2.transform.position;
         door3OriginalLocation = door3.transform.position;
         door4OriginalLocation = door4.transform.position;
-
-        // FOR TESTING
-        //cutscene2 = true;
-        //cutscene3 = true;
-        //cutscene4 = true;
+        lose = false;
+        laughtrack.SetActive(false);
+        textbox.SetActive(false);
+        loseText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -105,7 +107,17 @@ public class GameManager : MonoBehaviour
             cutscene4 = false;
             cutscene5 = false;
             cutscene6 = false;
-            SceneManager.LoadScene("StartScene");
+            textbox.SetActive(true);
+            loseText.SetActive(true);
+            laughtrack.SetActive(true);
+            player.gameObject.GetComponent<PlayerBehavior>().playerModel.GetComponent<Animator>().SetBool("isDancing", true);
+            musicManager.gameObject.GetComponent<MusicManager>().badDancing = true;
+            musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
+            musicManager.gameObject.GetComponent<MusicManager>().goodPlaying = false;
+            if (Input.GetKey(KeyCode.R))
+            {
+                SceneManager.LoadScene("Gameplay");
+            }
         }
         // ********************* CONTROLLING THE BAR *********************
         if (t < totalTimerTime && !dancing && !caught && !cutscenePlaying)
@@ -131,7 +143,7 @@ public class GameManager : MonoBehaviour
                 value = slider.value;
                 startIncrease = false;
                 t = 0f;
-                totalTimerTime = 20f * (1 - slider.value);
+                totalTimerTime = 2f * (1 - slider.value);
             }
             slider.value = Mathf.Lerp(value, 1, Mathf.Min(1, t / totalTimerTime));
             t += Time.deltaTime;
@@ -150,7 +162,7 @@ public class GameManager : MonoBehaviour
             slider.value = Mathf.Lerp(value, 0, Mathf.Min(1, t / totalTimerTime));
             t += Time.deltaTime;
         }
-        if (slider.value <= 0.01)
+        if (slider.value <= 0.01 && !lose)
         {
             lose = true;
         }

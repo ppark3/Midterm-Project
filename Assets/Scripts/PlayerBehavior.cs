@@ -34,13 +34,13 @@ public class PlayerBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        playerModel.GetComponent<Animator>().SetBool("isDancing", false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.cutscenePlaying)
+        if (!GameManager.cutscenePlaying && !GameManager.lose)
         {
             if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.J) && this.gameObject.transform.position.z >= -15) // moving up
             {
@@ -120,7 +120,10 @@ public class PlayerBehavior : MonoBehaviour
         else
         {
             musicManager.gameObject.GetComponent<MusicManager>().goodDancing = false;
-            musicManager.gameObject.GetComponent<MusicManager>().badDancing = false;
+            if (!GameManager.lose)
+            {
+                musicManager.gameObject.GetComponent<MusicManager>().badDancing = false;
+            }
             GameManager.dancing = false;
             GameManager.startDecrease = true;
             GameManager.caught = false;

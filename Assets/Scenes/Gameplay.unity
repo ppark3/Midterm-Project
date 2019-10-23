@@ -1043,7 +1043,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &180328987
 GameObject:
@@ -1343,7 +1343,7 @@ Transform:
   - {fileID: 1345080899}
   - {fileID: 46433297}
   m_Father: {fileID: 0}
-  m_RootOrder: 32
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &228452895
 MonoBehaviour:
@@ -1469,7 +1469,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &254681677
 GameObject:
@@ -1561,7 +1561,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &284496099
 GameObject:
@@ -1805,7 +1805,7 @@ Transform:
   m_LocalScale: {x: 247.64651, y: 2.6612248, z: 110.43027}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &322771411
 GameObject:
@@ -2154,7 +2154,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &434119243
 GameObject:
@@ -2215,9 +2215,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Uh oh... A <color="blue">blue </color>passenger... Passengers will stare
-    at you if you dance for too long. Maybe you can distract them with the can on
-    the floor...
+  m_text: 'Uh oh... A <color="blue">blue </color>passenger. Passengers will stare
+    at you if you dance for too long, and that can get embarrassing. Try distracting
+    them with the can on the floor!
 
     <color="purple">*Pick up and throw cans by pressing "K"! When passengers look
     at you while you''re dancing, the bar on top will decrease dramatically.'
@@ -2290,10 +2290,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: -61.894325, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 434119245}
-    characterCount: 275
+    characterCount: 295
     spriteCount: 0
-    spaceCount: 49
-    wordCount: 50
+    spaceCount: 52
+    wordCount: 53
     linkCount: 0
     lineCount: 4
     pageCount: 1
@@ -2553,7 +2553,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 1c3008fc391ac4774893ee9fed6793ee,
         type: 3}
       propertyPath: m_RootOrder
-      value: 33
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1c3008fc391ac4774893ee9fed6793ee,
         type: 3}
@@ -2996,6 +2996,133 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &578087187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 578087189}
+  - component: {fileID: 578087188}
+  m_Layer: 0
+  m_Name: LaughTrack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!82 &578087188
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578087187}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6ee01cad03db14ac1b0391ee7b2015e1, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.85
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &578087189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578087187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.727155, y: 34.78722, z: 4.728344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &624170076
 GameObject:
   m_ObjectHideFlags: 0
@@ -3086,7 +3213,7 @@ Transform:
   m_LocalScale: {x: 247.64651, y: 2.6612248, z: 110.43027}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &652701519
 GameObject:
@@ -3789,8 +3916,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: "Oh boy... Another <color=\"red\">red </color>passenger. \n<color=\"purple\">*Passengers
-    react to your dancing faster if you are close to them. If you're gonna dance,
-    try dancing far away from them!"
+    react to your dancing faster if you are closer to them. If you're gonna dance,
+    try dancing from afar!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7861063c09e5a4865bebc92ca3e8d023, type: 2}
   m_sharedMaterial: {fileID: -2225052411315942534, guid: 7861063c09e5a4865bebc92ca3e8d023,
@@ -3860,10 +3987,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: -61.894325, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 718477506}
-    characterCount: 155
+    characterCount: 147
     spriteCount: 0
-    spaceCount: 27
-    wordCount: 27
+    spaceCount: 25
+    wordCount: 25
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -3966,11 +4093,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Yikes. A <color="red">red</color> passenger. These guys don''t care about
-    what''s behind them, though, so dance behind them and you''ll be safe from them!
+  m_text: 'Yikes. A <color="red">red</color> passenger. These guys can''t turn around
+    though, so just dance behind them and you''ll be fine!
 
-    <color="purple">*Red passengers are perfect for hiding. Dance right behind the
-    red passenger and the blue passenger will not be able to see you!'
+    <color="purple">*Red passengers are good for hiding. Dance right behind the red
+    passenger and the blue passenger will not be able to see you!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7861063c09e5a4865bebc92ca3e8d023, type: 2}
   m_sharedMaterial: {fileID: -2225052411315942534, guid: 7861063c09e5a4865bebc92ca3e8d023,
@@ -4040,10 +4167,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: -61.894325, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 739160603}
-    characterCount: 259
+    characterCount: 232
     spriteCount: 0
-    spaceCount: 45
-    wordCount: 46
+    spaceCount: 41
+    wordCount: 42
     linkCount: 0
     lineCount: 4
     pageCount: 1
@@ -4177,7 +4304,7 @@ Transform:
   m_LocalScale: {x: 133.53624, y: 2.6612248, z: 110.43027}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &794571772
 GameObject:
@@ -4324,7 +4451,8 @@ MonoBehaviour:
   value: 0
   mainLight: {fileID: 705507993}
   spotlight: {fileID: 1230125228}
-  lose: 0
+  laughtrack: {fileID: 578087187}
+  musicManager: {fileID: 975155058}
   winText: {fileID: 543504229}
   camera1: {fileID: 963194227}
   camera2: {fileID: 307455063}
@@ -4349,6 +4477,7 @@ MonoBehaviour:
   text4: {fileID: 718477504}
   text5: {fileID: 1701341638}
   text6: {fileID: 1787753384}
+  loseText: {fileID: 1529720935}
   up: {fileID: 659507070}
   down: {fileID: 1312676004}
   left: {fileID: 284496102}
@@ -4429,7 +4558,7 @@ PrefabInstance:
     - target: {fileID: 5712499665251316838, guid: d2b43154c112a41ea85d86ab43bbc801,
         type: 3}
       propertyPath: m_RootOrder
-      value: 31
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 5712499665251316838, guid: d2b43154c112a41ea85d86ab43bbc801,
         type: 3}
@@ -4737,7 +4866,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &948203170
 GameObject:
@@ -5307,6 +5436,80 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029842303}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1127538418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1127538419}
+  - component: {fileID: 1127538421}
+  - component: {fileID: 1127538420}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [New York Line SDF Material + LiberationSans SDF Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1127538419
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127538418}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1529720936}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1127538420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127538418}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 0
+  m_canvasRenderer: {fileID: 1127538421}
+  m_TextComponent: {fileID: 1529720937}
+  m_materialReferenceIndex: 1
+--- !u!222 &1127538421
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127538418}
+  m_CullTransparentMesh: 0
 --- !u!1 &1201758771
 GameObject:
   m_ObjectHideFlags: 0
@@ -6300,7 +6503,7 @@ Transform:
   - {fileID: 1896811676}
   - {fileID: 133767583576926271}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1483546696
 MonoBehaviour:
@@ -6347,6 +6550,186 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1529720935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1529720936}
+  - component: {fileID: 1529720939}
+  - component: {fileID: 1529720937}
+  - component: {fileID: 1529720938}
+  m_Layer: 5
+  m_Name: LoseText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1529720936
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529720935}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -210}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1127538419}
+  m_Father: {fileID: 1599132143}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -2, y: -130}
+  m_SizeDelta: {x: 310, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1529720937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529720935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_text: 'You lost!
+
+    Everyone on the train thinks you''re super weird now.
+
+    <color="purple">Press "R" to try again.'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 7861063c09e5a4865bebc92ca3e8d023, type: 2}
+  m_sharedMaterial: {fileID: -2225052411315942534, guid: 7861063c09e5a4865bebc92ca3e8d023,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 12
+  m_fontSizeBase: 12
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_textAlignment: 258
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: -1
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: -61.894325, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 1529720937}
+    characterCount: 86
+    spriteCount: 0
+    spaceCount: 15
+    wordCount: 16
+    linkCount: 0
+    lineCount: 3
+    pageCount: 1
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 1127538420}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1529720938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529720935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19d36a711df664c5ba50efb7b568f5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TextComponent: {fileID: 0}
+  displayed: 0
+  isTyping: 0
+  cancelTyping: 0
+--- !u!222 &1529720939
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529720935}
+  m_CullTransparentMesh: 0
 --- !u!1 &1570770546
 GameObject:
   m_ObjectHideFlags: 0
@@ -6437,7 +6820,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1596969555
 Rigidbody:
@@ -6554,6 +6937,7 @@ RectTransform:
   - {fileID: 718477505}
   - {fileID: 1701341639}
   - {fileID: 1787753385}
+  - {fileID: 1529720936}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6730,7 +7114,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1665568225
 MonoBehaviour:
@@ -6925,7 +7309,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'A <#0EA900>green</color> passenger! These guys walk around the cart.
+  m_text: 'A <#0EA900>green</color> passenger! These guys walk back and forth across
+    the cart.
 
     <color="purple">*It might be helpful to wait until a green passenger gets to a
     specific part of the train before throwing a can or dancing.'
@@ -6998,10 +7383,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: -61.894325, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1701341640}
-    characterCount: 175
+    characterCount: 190
     spriteCount: 0
-    spaceCount: 32
-    wordCount: 33
+    spaceCount: 35
+    wordCount: 36
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -7297,10 +7682,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Another <color="blue">blue</color> passenger?! You''re almost done choreographing
-    though... Just a little more and you''re good! You got this!
+  m_text: 'Another <color="blue">blue</color> passenger?! The cart sure is getting
+    crowded... Luckily for you, the next stop is where you''ll need to get off. You''re
+    almost there, so just hang on! You got this!
 
-    <color="purple">*This is the final level! Good luck!'
+    <color="purple">*This is the final level. Good luck.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7861063c09e5a4865bebc92ca3e8d023, type: 2}
   m_sharedMaterial: {fileID: -2225052411315942534, guid: 7861063c09e5a4865bebc92ca3e8d023,
@@ -7837,13 +8223,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'You need to teach a dance piece for your dance team practice today, but
-    you didn''t choreograph anything. Guess you''ll just have to choreograph on the
-    train!
+  m_text: 'You''re the only one in this train cart. You know what that means...
 
     <color="purple">*Move with "WASD". Press and hold "J" to choreograph/dance. Dancing
     will fill up the pink bar at the top. Fill it completely to move on to the next
-    level!'
+    level! You lose when the bar completely depletes. Press "Space" to clear text.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7861063c09e5a4865bebc92ca3e8d023, type: 2}
   m_sharedMaterial: {fileID: -2225052411315942534, guid: 7861063c09e5a4865bebc92ca3e8d023,
@@ -7913,10 +8297,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: -61.894325, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1882496698}
-    characterCount: 311
+    characterCount: 294
     spriteCount: 0
-    spaceCount: 55
-    wordCount: 57
+    spaceCount: 53
+    wordCount: 55
     linkCount: 0
     lineCount: 4
     pageCount: 1
@@ -8847,7 +9231,7 @@ Transform:
   - {fileID: 5589200501113368312}
   - {fileID: 5497743779376106075}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5589200500485169124
 GameObject:
@@ -9010,7 +9394,7 @@ Transform:
   - {fileID: 5589200501071591717}
   - {fileID: 5497743779317226886}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &5589200500559520344
 MeshRenderer:
@@ -9073,7 +9457,7 @@ Transform:
   - {fileID: 5589200501005587264}
   - {fileID: 5497743779383228387}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5589200500559520348
 GameObject:
@@ -9637,7 +10021,7 @@ Transform:
   - {fileID: 5589200501710418124}
   - {fileID: 5497743779018167407}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &6357438738147226145
 MeshRenderer:
