@@ -556,6 +556,8 @@ public class GameManager : MonoBehaviour
                 else if (waitBeforeStart >= 4.5)
                 {
                     winText.gameObject.SetActive(true);
+                    door1.gameObject.transform.position = Vector3.MoveTowards(door1.gameObject.transform.position, door1OriginalLocation, 0.1f);
+                    door2.gameObject.transform.position = Vector3.MoveTowards(door2.gameObject.transform.position, door2OriginalLocation, 0.1f);
                 }
                 else if (waitBeforeStart >= 3)
                 {
